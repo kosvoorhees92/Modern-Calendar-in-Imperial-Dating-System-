@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Imperial Calendar</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 50px;
+            background-color: #000000;
+            color: #FFD700;
+        }
+        .container {
+            background-color: rgba(255, 215, 0, 0.2); /* Semi-transparent gold */
+            padding: 20px;
+            border-radius: 10px;
+            max-width: 600px;
+            margin: 0 auto;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Imperial Calendar</h1>
+        <p id="imperialDate"></p>
+    </div>
+
+    <script>
+        function getImperialDate() {
+            const now = new Date();
+            let year = now.getFullYear();
+            let millenium = Math.floor(year / 1000) + 1;
+            year = year % 1000;
+            year = String(year).padStart(3, '0');
+
+            // Calculate day of the year
+            const startOfYear = new Date(now.getFullYear(), 0, 0);
+            const dayOfYear = Math.floor((now - startOfYear) / (1000 * 60 * 60 * 24));
+
+            // Calculate year fraction
+            const yearFraction = Math.floor((dayOfYear / 365) * 1000);
+            const fractionString = String(yearFraction).padStart(3, '0');
+
+            // Check Number, assuming 0 for Terra
+            const checkNumber = 0;
+
+            // Format the Imperial date
+            const imperialDate = `${checkNumber}${fractionString}.${year}.M${String(millenium).padStart(2, '0')}`;
+            return imperialDate;
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            document.getElementById('imperialDate').innerText = getImperialDate();
+        });
+    </script>
+</body>
+</html>
